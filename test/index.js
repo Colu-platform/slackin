@@ -4,9 +4,9 @@ import slackin from '../lib/index';
 
 describe('slackin', () => {
   describe('POST /invite', () => {
-    let mockNumUsers = (org) => {
-      nock(`https://${org}.slack.com`)
-        .get('/api/rtm.start?token=mytoken')
+    let mockNumUsers = (opts) => {
+      nock(`https://${opts.org}.slack.com`)
+        .get(`/api/rtm.start?token=${opts.token}`)
         .reply(200, {
           channels: [{}],
           team: {
@@ -24,7 +24,7 @@ describe('slackin', () => {
       };
 
       // TODO simplify mocking
-      mockNumUsers(opts.org);
+      mockNumUsers(opts);
       nock(`https://${opts.org}.slack.com`)
         .post('/api/users.admin.invite')
         .reply(200, { ok: true });
@@ -46,7 +46,7 @@ describe('slackin', () => {
       };
 
       // TODO simplify mocking
-      mockNumUsers(opts.org);
+      mockNumUsers(opts);
       nock(`https://${opts.org}.slack.com`)
         .post('/api/users.admin.invite')
         .reply(200, {
