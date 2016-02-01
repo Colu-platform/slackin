@@ -1,5 +1,6 @@
 {
   "name": "slackin",
+  "license": "https://www.colu.co/TOS",
   "version": "0.6.0",
   "description": "",
   "dependencies": {
